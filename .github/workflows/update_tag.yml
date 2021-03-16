@@ -1,0 +1,28 @@
+name: Update Quirrel Tag
+
+on:
+  schedule:
+    - cron: '0 0 * * *'
+  workflow_dispatch:
+
+env:
+  IMAGE: ghcr.io/quirrel-dev/quirrel:main
+
+jobs:
+  update:
+    name: Update Quirrel Tag
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Get Latest Tag
+      run: |
+        docker pull ghcr.io/quirrel-dev/quirrel:main
+        tag="$(docker inspect --format='{{index .RepoDigests 0}}' $IMAGE)"
+        dockerfile="FROM $tag\nCOPY CHECKS ."
+        echo -e $dockerfile > Dockerfile
+    - name: Create Pull Request
+      uses: peter-evans/create-pull-request@v3
+      with:
+        commit-message: Update pinned hash
+        title: Update pinned hash
+        delete-branch: true
