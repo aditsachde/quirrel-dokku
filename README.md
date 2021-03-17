@@ -43,4 +43,6 @@ Set `secret.SSH_PRIVATE_KEY` to the newly generated key.
 
 Set `secret.DOKKU_URL` to the deploy url of your Dokku instance. For example, `dokku.me:22`.
 
-If your Dokku app is not named quirrel, you may have to update the deploy workflow. More information is availble on the [Dokku docs](https://dokku.com/docs/deployment/continuous-integration/github-actions/).
+Optionally, set `secret.SSH_HOST_KEY` to the output of `ssh-keyscan -t ecdsa dokku.me` to prevent the host IP showing up in logs. If the host IP is still present, append it to the domain in the output of `ssh-keyscan` (ie `dokku.me,10.0.0.2 ecd...`).
+
+If your Dokku app is not named quirrel, you may have to update the deploy workflow. The workflow also always force pushes, as this repo should be the source of truth. More information is availble on the [Dokku docs](https://dokku.com/docs/deployment/continuous-integration/github-actions/).

@@ -14,13 +14,10 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Set SSH log level
-        run: |
-          mkdir -p ~/.ssh
-          echo "LogLevel ERROR" > ~/.ssh/config
-
       - name: Push to dokku
         uses: dokku/github-action@master
         with:
           git_remote_url: "ssh://dokku@${{ secrets.DOKKU_URL }}/quirrel"
+          git_push_flags: "--force"
           ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
+          ssh_host_key: ${{ secrets.SSH_HOST_KEY }}
