@@ -1,2 +1,2 @@
-FROM ghcr.io/quirrel-dev/quirrel@sha256:72713936857f17acfd38741665ec2da13479e9458c46f7ae8b9668955a34eeb7
+FROM ghcr.io/quirrel-dev/quirrel@sha256:469d474963adcaa0040cf472b06a1552a41c71e85624c2fd4550ff35e2b31190
 COPY CHECKS .
